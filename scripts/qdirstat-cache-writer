@@ -50,7 +50,7 @@ use English;
 use Getopt::Std;
 use Fcntl ':mode';
 use Encode;
-use URI::Escape qw(uri_escape);
+# use URI::Escape qw(uri_escape);
 use vars qw( $opt_l $opt_m $opt_v $opt_d $opt_h );
 
 
@@ -314,11 +314,11 @@ sub write_dir_entry()
 
 
     $dir =~ s://+:/:g;    # Replace multiple // with one
-    my $escaped_dir = uri_escape( $dir, $unsafe_chars );
+    # my $escaped_dir = uri_escape( $dir, $unsafe_chars );
 
     # Write cache file entry for this directory (even if it's a mount point)
 
-    print CACHE "D $escaped_dir";
+    # print CACHE "D $escaped_dir";
     print CACHE "\t$size";
     printf CACHE "\t0x%x\n", $mtime;
 
