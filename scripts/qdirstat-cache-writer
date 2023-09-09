@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/data/data/com.termux/files/usr/bin/perl
 #
 # qdirstat-cache-writer - script to write QDirStat cache files from cron jobs
 #
@@ -50,7 +50,7 @@ use English;
 use Getopt::Std;
 use Fcntl ':mode';
 use Encode;
-use URI::Escape qw(uri_escape);
+# use URI::Escape qw(uri_escape);
 use vars qw( $opt_l $opt_m $opt_v $opt_d $opt_h );
 
 
@@ -314,11 +314,12 @@ sub write_dir_entry()
 
 
     $dir =~ s://+:/:g;    # Replace multiple // with one
-    my $escaped_dir = uri_escape( $dir, $unsafe_chars );
+    # my $escaped_dir = uri_escape( $dir, $unsafe_chars );
 
     # Write cache file entry for this directory (even if it's a mount point)
 
-    print CACHE "D $escaped_dir";
+    # print CACHE "D $escaped_dir";
+    print CACHE "D $dir";
     print CACHE "\t$size";
     printf CACHE "\t0x%x\n", $mtime;
 
@@ -429,11 +430,12 @@ sub write_file_entry()
 
     print CACHE "$type";
 
-    $name = uri_escape( $name, $unsafe_chars );
+    # $name = uri_escape( $name, $unsafe_chars );
+    $name = $name;
 
     if ( $long_format )
     {
-	$dir = uri_escape( $dir, $unsafe_chars );
+	# $dir = uri_escape( $dir, $unsafe_chars );
         my $full_path = $dir . "/" . $name;
         $full_path =~ s://+:/:g; # Replace multiple // with one
 
